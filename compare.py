@@ -9,20 +9,12 @@ def levenstein(first_arr, second_arr):
     return F[len(first_arr)][len(second_arr)]
 
 
-def check(arr, i):
-    for elem in arr:
-        if elem == '->':
-            print('SOS', i)
-
-
 write = open('scores.txt', 'w')
 mas = open('input.txt').read().split('\n')
 for i in range(len(mas)):
     a, b = mas[i].split()
     first = open(a, 'r').read().split()
     second = open(b, 'r').read().split()
-    check(first, i)
-    check(second, i)
     lev = levenstein(first, second)
     if max(len(first), len(second)) != 0:
         open('scores.txt', 'a').write(str(1 - lev / max(len(first), len(second))) + '\n')
