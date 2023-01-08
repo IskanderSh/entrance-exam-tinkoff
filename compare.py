@@ -1,12 +1,15 @@
-def levenstein(first_arr, second_arr):
-    F = [[i + j if i * j == 0 else 0 for j in range(len(second_arr) + 1)] for i in range(len(first_arr) + 1)]
-    for i in range(1, len(first_arr) + 1):
-        for j in range(1, len(second_arr) + 1):
-            if first_arr[i - 1] == second_arr[j - 1]:
-                F[i][j] = F[i - 1][j - 1]
+def levenstein(first_array, second_array):
+    editing_distance = [[i + j if i * j == 0 else 0
+                         for j in range(len(second_array) + 1)]
+                        for i in range(len(first_array) + 1)]
+    for i in range(1, len(first_array) + 1):
+        for j in range(1, len(second_array) + 1):
+            if first_array[i - 1] == second_array[j - 1]:
+                editing_distance[i][j] = editing_distance[i - 1][j - 1]
             else:
-                F[i][j] = 1 + min(F[i - 1][j], F[i][j - 1], F[i - 1][j - 1])
-    return F[len(first_arr)][len(second_arr)]
+                editing_distance[i][j] = 1 + \
+                            min(editing_distance[i - 1][j], editing_distance[i][j - 1], editing_distance[i - 1][j - 1])
+    return editing_distance[len(first_array)][len(second_array)]
 
 
 write = open('scores.txt', 'w')
